@@ -1,0 +1,17 @@
+
+
+
+<div>
+  <table>
+    <tbody>
+    <tr *ngFor="let item of smartphoneItems" (click)="selectSmartphoneItem(item)">
+      <td>{{ item.model }}</td>
+      <td>{{ item.color }}</td>
+      <td>{{ item.size }}</td>
+      <td>{{ item.price }}</td>
+      <td>{{ item.isWaterproof }}</td>
+    </tr>
+    </tbody>
+  </table>
+  <app-smartphone-list-item *ngFor="let item of smartphoneItems" [item]="item"></app-smartphone-list-item>
+</div>

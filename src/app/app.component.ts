@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from  '@angular/common';
 import { smartPhone } from '../shared/models/user';
+import {SmartphoneListComponent} from "./smartphone-list/smartphone-list.component";
+import {SmartphoneListItemComponent} from "./smartphone-list-item/smartphone-list-item.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule,SmartphoneListComponent,SmartphoneListItemComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
