@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CommonModule, NgForOf} from "@angular/common";
 import {SmartphoneListItemComponent } from "../smartphone-list-item/smartphone-list-item.component";
 import {smartPhone} from "../../shared/models/smartphone";
@@ -19,6 +19,7 @@ import {SmartphoneService} from "../services/smartphone.service";
 export class SmartphoneListComponent implements OnInit {
 
   smartPhoneList: smartPhone[] = [];
+  @Input() smartPhone!: smartPhone;
 
   constructor(private smartphoneService: SmartphoneService) {
   }
