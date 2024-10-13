@@ -1,17 +1,10 @@
-<div>
-  <table>
-    <tbody>
-    <tr *ngFor="let smartphone of smartPhoneList">
+<html>
+    <tr *ngFor="let smartphone of smartPhoneList"
+        [routerLink]="['/smartphone', smartphone.model]">
       <td>{{ smartphone.model }}</td>
       <td>{{ smartphone.color }}</td>
       <td>{{ smartphone.size }}</td>
       <td>{{ smartphone.price }}</td>
       <td>{{ smartphone.isWaterproof }}</td>
-
-      <td>
-        <app-smartphone-list-item [smartPhone]="smartphone"></app-smartphone-list-item>
-      </td>
     </tr>
-    </tbody>
-  </table>
-</div>
+</html>

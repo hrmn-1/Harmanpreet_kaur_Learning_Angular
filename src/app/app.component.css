@@ -1,21 +1,78 @@
-.container {
-  max-width: 900px;
-  margin: 20px;
-  padding: 20px;
-  background-color: lightpink;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+/* General Reset for Margin and Padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
-h2 {
-  color: #333;
-  text-align: center;
+
+/* Container Styling */
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Navigation Bar Styling */
+.nav-bar {
+  background-color: pink;
+  padding: 10px;
   margin-bottom: 20px;
 }
-p {
+
+
+.nav-bar nav a {
+  color: white;
+  text-decoration: underline;
+  margin-right: 15px;
   font-size: 18px;
-  color: #555;
-  margin: 5px 0;
 }
+
+.nav-bar nav a:hover {
+  color: #ddd;
+  text-decoration: underline;
+}
+
+.nav-bar nav a.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+
+
+/* App Container */
+.app-container {
+  text-align: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
+/* Heading */
+h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+}
+
+
+
+
 
 
 

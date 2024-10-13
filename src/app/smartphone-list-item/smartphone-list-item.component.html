@@ -1,7 +1,11 @@
-<div style="border: 2px solid hotpink; padding: 10px; margin:10px;" >
-  <h3>{{smartPhone?.model}}</h3>
-  <p>{{smartPhone?.color}}</p>
-  <p>{{smartPhone.size}}</p>
-  <p>{{smartPhone.price}}</p>
-  <p>{{smartPhone.isWaterproof}}</p>
+<div *ngIf="smartphone" class="smartphone-detail">
+  <h2>Smartphone </h2>
+  <p><strong>Model:</strong> {{ smartphone.model }}</p>
+  <p><strong>Color:</strong> {{ smartphone.color }}</p>
+  <p><strong>Size:</strong> {{ smartphone.size }}</p>
+  <p><strong>Price:</strong> {{ smartphone.price}}</p>
+  <p><strong>Waterproof:</strong> {{ smartphone.isWaterproof }}</p>
+  <button (click)="goBackward()" [disabled]="currentIndex === 0">Previous</button>
+  <button (click)="goForward()" [disabled]="currentIndex === smartPhoneList.length - 1">Next</button>
+  <button (click)="goBack()">Back to Smartphone List</button>
 </div>

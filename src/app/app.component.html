@@ -1,3 +1,19 @@
-<h1>{{title}}</h1>
-<app-smartphone-list *ngIf ="displaysmartPhone" [smartPhone] = "displaysmartPhone"></app-smartphone-list>
-<app-smartphone-list></app-smartphone-list>
+<html>
+<div class ="container">
+
+  <div class="nav-bar">
+  <nav>
+    <a routerLink="/smartphone" routerLinkActive="active">Smartphone list</a>
+    <br>
+    <a routerLink="/modify-smart-phone-component" routerLinkActive="active"> Modify smartphone component</a>
+    <br>
+    <a routerLink="/page-not-found-component" routerLinkActive="active">Page not found component</a>
+  </nav>
+</div>
+<div class="app-container">
+  <h2>{{title}}</h2>
+
+  <router-outlet></router-outlet>
+  </div>
+</div>
+</html>
