@@ -1,10 +1,25 @@
-<html>
-    <tr *ngFor="let smartphone of smartPhoneList"
-        [routerLink]="['/smartphone', smartphone.model]">
-      <td>{{ smartphone.model }}</td>
-      <td>{{ smartphone.color }}</td>
-      <td>{{ smartphone.size }}</td>
-      <td>{{ smartphone.price }}</td>
-      <td>{{ smartphone.isWaterproof }}</td>
-    </tr>
-</html>
+<table>
+  <thead>
+  <tr>
+    <th>Model</th>
+    <th>Color</th>
+    <th>Size</th>
+    <th>Price</th>
+    <th>Waterproof</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let smartphone of smartPhoneList">
+    <td>{{ smartphone.model }}</td>
+    <td>{{ smartphone.color }}</td>
+    <td>{{ smartphone.size }}</td>
+    <td>{{ smartphone.price }}</td>
+    <td>{{ smartphone.isWaterproof }}</td>
+    <td>
+      <button (click)="editSmartphone(smartphone.model)" class="btn btn-warning">Edit</button>
+      <button (click)="deleteSmartphone(smartphone.model)" class="btn btn-danger">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

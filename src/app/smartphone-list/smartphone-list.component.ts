@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {CommonModule, NgForOf, NgOptimizedImage} from '@angular/common';
+import { CommonModule, NgForOf, NgOptimizedImage } from '@angular/common';
 import { SmartphoneListItemComponent } from '../smartphone-list-item/smartphone-list-item.component';
-import {smartPhone } from '../../shared/models/smartphone';
+import { smartPhone } from '../../shared/models/smartphone';
 import { SmartphoneService } from '../services/smartphone.service';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-smartphone-list',
@@ -11,7 +11,6 @@ import { RouterLink } from '@angular/router';
   imports: [
     NgForOf,
     SmartphoneListItemComponent,
-    RouterLink,
     CommonModule,
     NgOptimizedImage
   ],
@@ -19,16 +18,13 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./smartphone-list.component.css']
 })
 export class SmartphoneListComponent implements OnInit {
-  // Columns to display in the table
-  displayedColumns: string[] = ['model', 'color', 'size', 'price', 'isWaterproof'];
+  displayedColumns: string[] = ['model', 'color', 'size', 'price', 'isWaterproof', 'actions'];
   smartPhoneList: smartPhone[] = [];
 
-  constructor(private smartphoneService: SmartphoneService) {
-    // Constructor used for dependency injection
+  constructor(private smartphoneService: SmartphoneService, private router: Router) {
   }
 
   ngOnInit() {
-    // Fetch smartphones when component initializes
     this.smartphoneService.getSmartphones().subscribe({
       next: (data: smartPhone[]) => (this.smartPhoneList = data),
       error: (err) => console.error('Error fetching smartphones', err),
@@ -36,10 +32,22 @@ export class SmartphoneListComponent implements OnInit {
     });
   }
 
-  selectedSmartphone?: smartPhone;
 
-  // Method to handle smartphone selection
-  selectSmartphone(smartphone: smartPhone): void {
-    this.selectedSmartphone = smartphone;
+  editSmartphone(model: string): void {
+    this.router.navigate(['/modify-smart-phone', model]);
+  }
+
+
+  deleteSmartphone(model: string): void {
+    if (confirm('Are you sure you want to delete this smartphone?')) {
+      this.smartphoneService.deleteSmartphone(model).subscribe({
+        next: () => {
+          console.log('Smartphone deleted successfully');
+          this.smartPhoneList = this.smartPhoneList.filter(smartphone => smartphone.model !== model); // Remove from the list
+        },
+        error: (err) => console.error('Error deleting smartphone', err)
+      });
+    }
   }
 }
+
