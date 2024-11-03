@@ -17,7 +17,7 @@
     <td>{{ smartphone.price }}</td>
     <td>{{ smartphone.isWaterproof }}</td>
     <td>
-      <button (click)="editSmartphone(smartphone.model)" class="btn btn-warning">Edit</button>
+      <button [routerLink]="['/smartphone', smartphone.model]" class="btn btn-primary">Edit</button>
       <button (click)="deleteSmartphone(smartphone.model)" class="btn btn-danger">Delete</button>
     </td>
   </tr>

@@ -12,7 +12,7 @@ import {ApplicationRef} from "@angular/core";
 const routes: Routes = [
   { path: '', redirectTo: '/smartphone', pathMatch: 'full' },
   { path: 'smartphone', component: SmartphoneListComponent },
-  { path: 'smartphone/:model', component: SmartphoneListItemComponent},
+  { path: 'smartphone/:model', component: ModifySmartPhoneComponentComponent},
   {path:'modify-smart-phone-component', component: ModifySmartPhoneComponentComponent},
   {path: '**', component:PageNotFoundComponentComponent}
 ];

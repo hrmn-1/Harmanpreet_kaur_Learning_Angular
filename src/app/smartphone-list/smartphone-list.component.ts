@@ -3,7 +3,7 @@ import { CommonModule, NgForOf, NgOptimizedImage } from '@angular/common';
 import { SmartphoneListItemComponent } from '../smartphone-list-item/smartphone-list-item.component';
 import { smartPhone } from '../../shared/models/smartphone';
 import { SmartphoneService } from '../services/smartphone.service';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-smartphone-list',
@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
     NgForOf,
     SmartphoneListItemComponent,
     CommonModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    RouterLink
   ],
   templateUrl: './smartphone-list.component.html',
   styleUrls: ['./smartphone-list.component.css']
@@ -34,7 +35,7 @@ export class SmartphoneListComponent implements OnInit {
 
 
   editSmartphone(model: string): void {
-    this.router.navigate(['/modify-smart-phone', model]);
+    this.router.navigate(['/modify-smart-phone-component-component', model]);
   }
 
 
@@ -43,9 +44,9 @@ export class SmartphoneListComponent implements OnInit {
       this.smartphoneService.deleteSmartphone(model).subscribe({
         next: () => {
           console.log('Smartphone deleted successfully');
-          this.smartPhoneList = this.smartPhoneList.filter(smartphone => smartphone.model !== model); // Remove from the list
+          this.smartPhoneList = this.smartPhoneList.filter(smartphone => smartphone.model !== model);
         },
-        error: (err) => console.error('Error deleting smartphone', err)
+
       });
     }
   }

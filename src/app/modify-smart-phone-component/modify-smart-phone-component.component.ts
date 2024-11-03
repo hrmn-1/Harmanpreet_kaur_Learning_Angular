@@ -36,4 +36,9 @@ export class ModifySmartPhoneComponentComponent {
       console.log('Form is invalid');
     }
   }
+  resetForm(): void {
+    this.smartphoneForm.reset();
+    this.isEditMode = false; // Optionally reset the edit mode if needed
+  }
+
 }
