@@ -1,4 +1,4 @@
-//mockStudent.data.ts
+//mockSmartPhone.data.ts
 //import the interface
 
 import { smartPhone } from './models/smartphone';
