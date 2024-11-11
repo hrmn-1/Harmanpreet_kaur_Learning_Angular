@@ -1,36 +1,48 @@
 import { Injectable } from '@angular/core';
-import {smartPhoneList} from "../../shared/mockSmartphone.data";
-import { Observable, of} from "rxjs";
-import {smartPhone} from "../../shared/models/smartphone";
+import { smartPhoneList } from "../../shared/mockSmartphone.data";
+import {catchError, Observable, of, throwError} from "rxjs";
+import { smartPhone } from "../../shared/models/smartphone";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SmartphoneService {
-  private smartphones: smartPhone[] = smartPhoneList; // Local copy of smartphone data for CRUD Operations
+  private apiUrl = 'api/smartphones'; // URL to web API
+  private smartphones: smartPhone[] = smartPhoneList; // Local copy of smartphone data for CRUD operations
 
-  constructor() { }
-  // Return all smartphones
+  constructor(private http: HttpClient) { }
+
+  // Retrieve all smartphones from API
   getSmartphones(): Observable<smartPhone[]> {
-    return of(smartPhoneList);
+    return this.http.get<smartPhone[]>(this.apiUrl).pipe(catchError(this.handleError));
   }
+
+  // Retrieve a smartphone by its model
   getSmartphoneByModel(model: string): Observable<smartPhone | undefined> {
-    const smartphone = this.smartphones.find(smartphone => smartphone.model === model);
-    return of(smartphone);
+    return this.http.get<smartPhone>(`${this.apiUrl}/${model}`).pipe(catchError(this.handleError));
   }
-  addSmartphone(newSmartphone: smartPhone): Observable<smartPhone[]> {
-    this.smartphones.push(newSmartphone);
-    return of(this.smartphones);
+
+  // Add a new smartphone
+  addSmartphone(newSmartphone: smartPhone): Observable<smartPhone> {
+    return this.http.post<smartPhone>(this.apiUrl, newSmartphone).pipe(catchError(this.handleError));
   }
-  updateSmartphone(updatedSmartphone: smartPhone): Observable<smartPhone[]> {
-    const index = this.smartphones.findIndex(phone => phone.model === updatedSmartphone.model);
-    if (index !== -1) {
-      this.smartphones[index] = updatedSmartphone;
-    }
-    return of(this.smartphones);
+
+  // Update an existing smartphone
+  updateSmartphone(updatedSmartphone: smartPhone): Observable<smartPhone> {
+    const url = `${this.apiUrl}/${updatedSmartphone.model}`;
+    return this.http.put<smartPhone>(url, updatedSmartphone).pipe(catchError(this.handleError));
   }
-  deleteSmartphone(model: string): Observable<smartPhone[]> {
-    this.smartphones = this.smartphones.filter(phone => phone.model !== model);
-    return of(this.smartphones);
+
+  // Delete a smartphone by its model
+  deleteSmartphone(model: string): Observable<{}> {
+    const url = `${this.apiUrl}/${model}`;
+    return this.http.delete(url).pipe(catchError(this.handleError));
+  }
+
+  // Handle errors for HTTP requests
+  private handleError(error: HttpErrorResponse) {
+    console.error('API error:', error);
+    return throwError(() => new Error('Server error, please try again.'));
   }
 }
