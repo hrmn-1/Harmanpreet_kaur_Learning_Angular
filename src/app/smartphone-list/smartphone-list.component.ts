@@ -5,6 +5,7 @@ import { smartPhone } from '../../shared/models/smartphone';
 import { SmartphoneService } from '../services/smartphone.service';
 import {Router, RouterLink} from '@angular/router';
 
+
 @Component({
   selector: 'app-smartphone-list',
   standalone: true,
@@ -21,34 +22,28 @@ import {Router, RouterLink} from '@angular/router';
 export class SmartphoneListComponent implements OnInit {
   displayedColumns: string[] = ['model', 'color', 'size', 'price', 'isWaterproof', 'actions'];
   smartPhoneList: smartPhone[] = [];
+  error: string | null = null;
 
   constructor(private smartphoneService: SmartphoneService, private router: Router) {
   }
 
   ngOnInit() {
     this.smartphoneService.getSmartphones().subscribe({
-      next: (data: smartPhone[]) => (this.smartPhoneList = data),
-      error: (err) => console.error('Error fetching smartphones', err),
-      complete: () => console.log('Smartphone data fetch complete!')
-    });
+      next: (data: smartPhone[]) => {this.smartPhoneList = data;
+      this.error = null;
+    },
+      error: err => {
+      this.error = 'Error fetching students'; // Set an error message
+      console.error("Error fetching Students", err);
+    },
+      complete: () => console.log("Student data fetch complete!")
+  });
+}
+ selectedSmartphone?: smartPhone;
+    selectSmartphone(smartphone: smartPhone): void {
+      this.selectedSmartphone = smartphone;
   }
 
 
-  editSmartphone(model: string): void {
-    this.router.navigate(['/modify-smart-phone-component-component', model]);
-  }
-
-
-  deleteSmartphone(model: string): void {
-    if (confirm('Are you sure you want to delete this smartphone?')) {
-      this.smartphoneService.deleteSmartphone(model).subscribe({
-        next: () => {
-          console.log('Smartphone deleted successfully');
-          this.smartPhoneList = this.smartPhoneList.filter(smartphone => smartphone.model !== model);
-        },
-
-      });
-    }
-  }
 }
 

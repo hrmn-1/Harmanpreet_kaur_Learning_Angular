@@ -9,3 +9,4 @@
   <button (click)="goForward()" [disabled]="currentIndex === smartPhoneList.length - 1">Next</button>
   <button (click)="goBack()">Back to Smartphone List</button>
 </div>
+<div *ngIf="error" class="error">{{ error }}</div>

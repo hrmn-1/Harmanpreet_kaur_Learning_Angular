@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { smartPhone } from '../../shared/models/smartphone';
 import { SmartphoneService } from '../services/smartphone.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-modify-smart-phone-component',
@@ -12,10 +14,17 @@ import { SmartphoneService } from '../services/smartphone.service';
   templateUrl: './modify-smart-phone-component.component.html',
   styleUrls: ['./modify-smart-phone-component.component.css']
 })
-export class ModifySmartPhoneComponentComponent {
+export class ModifySmartPhoneComponentComponent implements OnInit {
   smartphoneForm: FormGroup;
   isEditMode: boolean = false;
-  constructor(private fb: FormBuilder, private smartphoneService: SmartphoneService) {
+  error: string | null = null;
+
+  constructor(
+    private fb: FormBuilder,
+    private smartphoneService: SmartphoneService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     // Initialize the form with FormBuilder
     this.smartphoneForm = this.fb.group({
       model: ['', Validators.required],
@@ -26,19 +35,54 @@ export class ModifySmartPhoneComponentComponent {
     });
   }
 
+  ngOnInit(): void {
+    const model = this.route.snapshot.paramMap.get('model');
+    if (model) {
+      this.isEditMode = true;
+      this.smartphoneService.getSmartphoneByModel(model).pipe(
+        catchError(err => {
+          this.error = 'Error fetching smartphone';
+          console.error('Error fetching smartphone:', err);
+          return of(null);
+        })
+      ).subscribe(smartphone => {
+        if (smartphone) {
+          this.smartphoneForm.patchValue(smartphone);
+        }
+      });
+    }
+  }
+
   onSubmit(): void {
     if (this.smartphoneForm.valid) {
-      const newSmartphone: smartPhone = this.smartphoneForm.value;
-      this.smartphoneService.addSmartphone(newSmartphone).subscribe(response => {
-        console.log('Smartphone added successfully', response);
-      });
+      const smartphoneData: smartPhone = this.smartphoneForm.value;
+      if (this.isEditMode) {
+        this.smartphoneService.updateSmartphone(smartphoneData).subscribe(() => {
+          console.log('Smartphone updated successfully');
+          this.navigateToSmartphoneList();
+        });
+      } else {
+        this.smartphoneService.addSmartphone(smartphoneData).subscribe(() => {
+          console.log('Smartphone added successfully');
+          this.navigateToSmartphoneList();
+        });
+      }
     } else {
       console.log('Form is invalid');
     }
   }
-  resetForm(): void {
-    this.smartphoneForm.reset();
-    this.isEditMode = false; // Optionally reset the edit mode if needed
+
+  onDelete(): void {
+    const model = this.smartphoneForm.value.model;
+    if (model) {
+      this.smartphoneService.deleteSmartphone(model).subscribe(() => {
+        console.log('Smartphone deleted successfully');
+        this.navigateToSmartphoneList();
+      });
+    }
   }
 
+  navigateToSmartphoneList(): void {
+    this.router.navigate(['/smartphones']);
+  }
 }

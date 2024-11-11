@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SmartphoneService } from '../services/smartphone.service';
 import { smartPhoneList } from '../../shared/mockSmartphone.data';
 
+
 @Component({
   selector: 'app-smartphone-list-item',
   standalone: true,
@@ -18,6 +19,7 @@ export class SmartphoneListItemComponent implements OnInit {
   smartphone: smartPhone | undefined;
   smartphoneList: smartPhone[] = [];
   currentIndex: number = 0;
+  error: string|null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,21 +29,30 @@ export class SmartphoneListItemComponent implements OnInit {
 
   // Fetch the list of smartphones and subscribe to route parameter changes
   ngOnInit(): void {
-    this.smartphoneService.getSmartphones().subscribe(smartphones => {
-      this.smartphoneList = smartphones;
+    this.smartphoneService.getSmartphones().subscribe({
+       next: (smartphones: smartPhone[]) => {
+         this.smartphoneList = smartphones;
+         this.error = null;
 
-      // Subscribe to paramMap changes to update the view based on URL parameter
-      this.route.paramMap.subscribe(params => {
-        const model = params.get('model');
-        if (model) {
-          this.currentIndex = this.smartphoneList.findIndex(
-            phone => phone.model === model
-          );
-          this.smartphone = this.smartphoneList[this.currentIndex];
-        }
-      });
+
+         // Subscribe to paramMap changes to update the view based on URL parameter
+         this.route.paramMap.subscribe(params => {
+           const model = params.get('model');
+           if (model) {
+             this.currentIndex = this.smartphoneList.findIndex(
+               phone => phone.model === model
+             );
+             this.smartphone = this.smartphoneList[this.currentIndex];
+           }
+         });
+       },
+      error: (err) => {
+        this.error = 'Error fetching smartphone';
+        console.error('Error fetching smartphone:', err);
+      }
     });
   }
+
 
   // Navigate back to the smartphone list view
   goBack(): void {
@@ -63,6 +74,7 @@ export class SmartphoneListItemComponent implements OnInit {
       this.router.navigate(['/smartphone', this.smartphoneList[this.currentIndex].model]);
     }
   }
+
 
   protected readonly smartPhoneList = smartPhoneList;
 }
