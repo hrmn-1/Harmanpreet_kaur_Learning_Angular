@@ -4,6 +4,7 @@ import { SmartphoneListItemComponent } from '../smartphone-list-item/smartphone-
 import { smartPhone } from '../../shared/models/smartphone';
 import { SmartphoneService } from '../services/smartphone.service';
 import {Router, RouterLink} from '@angular/router';
+import {SmartphoneDisplayPipe} from "../pipes/smartphone-display.pipe";
 
 
 @Component({
@@ -14,7 +15,8 @@ import {Router, RouterLink} from '@angular/router';
     SmartphoneListItemComponent,
     CommonModule,
     NgOptimizedImage,
-    RouterLink
+    RouterLink,
+    SmartphoneDisplayPipe
   ],
   templateUrl: './smartphone-list.component.html',
   styleUrls: ['./smartphone-list.component.css']

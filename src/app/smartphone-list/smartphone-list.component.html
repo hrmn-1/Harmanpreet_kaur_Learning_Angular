@@ -6,8 +6,7 @@
 <table>
   <thead>
   <tr>
-    <th>Model</th>
-    <th>Color</th>
+    <th>Smartphone</th>
     <th>Size</th>
     <th>Price</th>
     <th>Waterproof</th>
@@ -16,8 +15,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let smartphone of smartPhoneList">
-    <td>{{ smartphone.model }}</td>
-    <td>{{ smartphone.color  | uppercase}}</td>
+    <td>{{ smartphone | smartphoneDisplay | uppercase}}</td>
     <td>{{ smartphone.size }}</td>
     <td>{{ smartphone.price  | currency: 'CAD': "symbol-narrow"}}</td>
     <td>{{ smartphone.isWaterproof }}</td>
