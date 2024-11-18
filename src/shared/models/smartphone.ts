@@ -1,4 +1,5 @@
 export interface smartPhone{
+
   model: string;
   color: string;
   size: number;
@@ -6,3 +7,4 @@ export interface smartPhone{
   isWaterproof: boolean;
 
 }
+// harmanpreet kaur
