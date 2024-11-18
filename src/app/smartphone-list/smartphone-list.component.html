@@ -17,10 +17,11 @@
   <tbody>
   <tr *ngFor="let smartphone of smartPhoneList">
     <td>{{ smartphone.model }}</td>
-    <td>{{ smartphone.color }}</td>
+    <td>{{ smartphone.color  | uppercase}}</td>
     <td>{{ smartphone.size }}</td>
-    <td>{{ smartphone.price }}</td>
+    <td>{{ smartphone.price  | currency: 'CAD': "symbol-narrow"}}</td>
     <td>{{ smartphone.isWaterproof }}</td>
+    <td>{{'2024-11-17T12:00:00' | date: 'fullDate'}}</td>
     <td>
       <button [routerLink]="['/smartphone', smartphone.model]" class="btn btn-primary">Edit</button>
 
