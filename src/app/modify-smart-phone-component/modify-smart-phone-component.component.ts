@@ -73,16 +73,16 @@ export class ModifySmartPhoneComponentComponent implements OnInit {
   }
 
   onDelete(): void {
-    const model = this.smartphoneForm.value.model;
+    const model = this.smartphoneForm.get('model')?.value;
     if (model) {
-      this.smartphoneService.deleteSmartphone(model).subscribe(() => {
+      this.smartphoneService.deleteSmartphone(model);
         console.log('Smartphone deleted successfully');
-        this.navigateToSmartphoneList();
-      });
+        this.router.navigate(['/smartphones'])
+      }
     }
-  }
-
   navigateToSmartphoneList(): void {
     this.router.navigate(['/smartphones']);
   }
+
+
 }
