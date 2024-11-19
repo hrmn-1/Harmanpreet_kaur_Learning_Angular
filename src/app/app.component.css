@@ -1,0 +1,78 @@
+/* General Reset for Margin and Padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Container Styling */
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Navigation Bar Styling */
+.nav-bar {
+  background-color: pink;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+
+.nav-bar nav a {
+  color: white;
+  text-decoration: underline;
+  margin-right: 15px;
+  font-size: 18px;
+}
+
+.nav-bar nav a:hover {
+  color: #ddd;
+  text-decoration: underline;
+}
+
+.nav-bar nav a.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+
+
+/* App Container */
+.app-container {
+  text-align: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
+/* Heading */
+h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+<!doctype HTML>
+<div class="container">
+  <h2>Smartphone List</h2>
+
+
+<table>
+  <thead>
+  <tr>
+    <th>Smartphone</th>
+    <th>Size</th>
+    <th>Price</th>
+    <th>Waterproof</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let smartphone of smartPhoneList">
+    <td>{{ smartphone | smartphoneDisplay | uppercase}}</td>
+    <td>{{ smartphone.size }}</td>
+    <td>{{ smartphone.price  | currency: 'CAD': "symbol-narrow"}}</td>
+    <td>{{ smartphone.isWaterproof }}</td>
+    <td>{{'2024-11-17T12:00:00' | date: 'fullDate'}}</td>
+    <td>
+      <button [routerLink]="['/smartphone', smartphone.model]" class="btn btn-primary">Edit</button>
+
+    </td>
+  </tr>
+  </tbody>
+</table>
+</div>
+<div *ngIf="error" class="error">{{ error }}</div>
