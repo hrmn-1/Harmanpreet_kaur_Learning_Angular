@@ -14,14 +14,14 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let smartphone of smartPhoneList">
+  <tr *ngFor="let smartphone of smartPhoneList" [routerLink]="['/smartphone', smartphone.model]" [appHoverHighlight]="'pink'" >
     <td>{{ smartphone | smartphoneDisplay | uppercase}}</td>
     <td>{{ smartphone.size }}</td>
     <td>{{ smartphone.price  | currency: 'CAD': "symbol-narrow"}}</td>
     <td>{{ smartphone.isWaterproof }}</td>
     <td>{{'2024-11-17T12:00:00' | date: 'fullDate'}}</td>
     <td>
-      <button [routerLink]="['/smartphone', smartphone.model]" class="btn btn-primary">Edit</button>
+      <button class="btn btn-primary">Edit</button>
 
     </td>
   </tr>

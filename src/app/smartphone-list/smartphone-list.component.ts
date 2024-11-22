@@ -5,6 +5,7 @@ import { smartPhone } from '../../shared/models/smartphone';
 import { SmartphoneService } from '../services/smartphone.service';
 import {Router, RouterLink} from '@angular/router';
 import {SmartphoneDisplayPipe} from "../pipes/smartphone-display.pipe";
+import {HoverHighlightDirective} from "../directives/hover-highlight.directive";
 
 
 @Component({
@@ -16,7 +17,8 @@ import {SmartphoneDisplayPipe} from "../pipes/smartphone-display.pipe";
     CommonModule,
     NgOptimizedImage,
     RouterLink,
-    SmartphoneDisplayPipe
+    SmartphoneDisplayPipe,
+    HoverHighlightDirective
   ],
   templateUrl: './smartphone-list.component.html',
   styleUrls: ['./smartphone-list.component.css']
