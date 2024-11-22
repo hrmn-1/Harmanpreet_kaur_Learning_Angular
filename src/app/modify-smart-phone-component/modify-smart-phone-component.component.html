@@ -2,56 +2,39 @@
 <form [formGroup]="smartphoneForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="model">Model:</label>
-    <input
-      type="text"
-      id="model"
-      formControlName="model"
-      class="form-control"
-      required
-    />
+    <input type="text" id="model" formControlName="model" placeholder="Enter smartphone model" [appHighlightOnFocus]="'pink'" />
+     <div *ngIf="smartphoneForm.get('model')?.invalid && smartphoneForm.get('model')?.touched">
+
+     </div>
   </div>
 
   <div class="form-group">
     <label for="color">Color:</label>
-    <input
-      type="text"
-      id="color"
-      formControlName="color"
-      class="form-control"
-      required
-    />
+    <input type="text" id="color" formControlName="color" placeholder="Enter color name" [appHighlightOnFocus]="'pink'" />
+    <div *ngIf="smartphoneForm.get('color')?.invalid && smartphoneForm.get('color')?.touched">
+
+    </div>
   </div>
 
   <div class="form-group">
     <label for="size">Size (in inches):</label>
-    <input
-      type="number"
-      id="size"
-      formControlName="size"
-      class="form-control"
-      required
-      min="0"
-    />
+    <input type="number" id="size" formControlName="size" min="0" placeholder=" Enter the phone size" [appHighlightOnFocus]="'pink'" />
+    <div *ngIf="smartphoneForm.get('size')?.invalid && smartphoneForm.get('size')?.touched">
+
+    </div>
   </div>
 
   <div class="form-group">
     <label for="price">Price:</label>
-    <input
-      type="number"
-      id="price"
-      formControlName="price"
-      class="form-control"
-      required
-      min="0"
-    />
+    <input type="number" id="price" formControlName="price" class="form-control" required min="0" placeholder=" Enter the phone price" [appHighlightOnFocus]="'pink'" />
+    <div *ngIf="smartphoneForm.get('price')?.invalid && smartphoneForm.get('price')?.touched">
+
+    </div>
+
   </div>
 
   <div class="form-group form-check">
-    <input
-      type="checkbox"
-      id="isWaterproof"
-      formControlName="isWaterproof"
-      class="form-check-input"
+    <input type="checkbox" id="isWaterproof" formControlName="isWaterproof" class="form-check-input"
     />
     <label for="isWaterproof" class="form-check-label">Is Waterproof?</label>
   </div>

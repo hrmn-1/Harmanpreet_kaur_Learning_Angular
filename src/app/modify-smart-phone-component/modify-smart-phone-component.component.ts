@@ -4,12 +4,14 @@ import { smartPhone } from '../../shared/models/smartphone';
 import { SmartphoneService } from '../services/smartphone.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
+import {HighlightOnFocusDirective} from "../directives/highlight-on-focus.directive";
 
 @Component({
   selector: 'app-modify-smart-phone-component',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HighlightOnFocusDirective
   ],
   templateUrl: './modify-smart-phone-component.component.html',
   styleUrls: ['./modify-smart-phone-component.component.css']
