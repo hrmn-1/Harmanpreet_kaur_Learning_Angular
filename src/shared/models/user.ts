@@ -6,3 +6,4 @@ export interface smartPhone{
   isWaterproof: boolean;
 
 }
+// harmanpreet kaur
