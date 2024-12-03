@@ -60,11 +60,11 @@ export class SmartphoneListComponent implements OnInit {
 
     deletesmartPhone(smartphoneModel: string): void {
     if (confirm('Are you sure you want to delete this smartphone?')) {
-      // Simulate the deletion by filtering out the smartphone
+
       this.smartPhoneList = this.smartPhoneList.filter(
         (smartphone: smartPhone) => smartphone.model !== smartphoneModel
       );
-      this.dataSource.data = this.smartPhoneList; // Update MatTableDataSource after deletion
+      this.dataSource.data = this.smartPhoneList;
       console.log(`Smartphone with model ${smartphoneModel} deleted successfully.`);
     }
   }

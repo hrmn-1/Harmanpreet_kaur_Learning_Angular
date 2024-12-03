@@ -35,7 +35,7 @@ export class SmartphoneListItemComponent implements OnInit {
         this.smartphoneList = smartphones;
         this.error = null;
 
-        // Explicitly typing 'params' as ParamMap
+
         this.route.paramMap.subscribe((params: ParamMap) => {
           const model = params.get('model');
           if (model) {
@@ -64,20 +64,20 @@ export class SmartphoneListItemComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/smartphone']);
+    this.router.navigate(['/smartPhone']);
   }
 
   goForward(): void {
     if (this.currentIndex < this.smartphoneList.length - 1) {
       this.currentIndex++;
-      this.router.navigate(['/smartphone', this.smartphoneList[this.currentIndex].model]);
+      this.router.navigate(['/smartPhone', this.smartphoneList[this.currentIndex].model]);
     }
   }
 
   goBackward(): void {
     if (this.currentIndex > 0) {
       this.currentIndex--;
-      this.router.navigate(['/smartphone', this.smartphoneList[this.currentIndex].model]);
+      this.router.navigate(['/smartPhone', this.smartphoneList[this.currentIndex].model]);
     }
   }
 }

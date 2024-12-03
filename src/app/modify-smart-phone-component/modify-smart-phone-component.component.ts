@@ -58,7 +58,7 @@ export class ModifySmartPhoneComponentComponent implements OnInit {
           console.error('Error fetching smartphone:', err);
           return of(null); // Return `null` if error occurs
         })
-      ).subscribe((smartphone: smartPhone | null) => { // Explicitly define the type here
+      ).subscribe((smartphone: smartPhone | null) => {
         if (smartphone) {
           this.smartphoneForm.patchValue(smartphone);
         } else {
