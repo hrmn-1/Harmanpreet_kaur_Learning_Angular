@@ -1,3 +1,4 @@
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SmartphoneListComponent } from './smartphone-list.component';
@@ -10,7 +11,7 @@ describe('SmartphoneListComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SmartphoneListComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SmartphoneListComponent);
     component = fixture.componentInstance;

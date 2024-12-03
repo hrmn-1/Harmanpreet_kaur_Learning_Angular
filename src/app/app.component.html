@@ -1,5 +1,5 @@
 <html>
-<div class ="container">
+<!--<div class ="container">
 
   <div class="nav-bar">
   <nav>
@@ -9,11 +9,16 @@
     <br>
     <a routerLink="/page-not-found-component" routerLinkActive="active">Page not found component</a>
   </nav>
-</div>
+</div> -->
+<mat-toolbar color="primary">
+<span class="spacer"></span>
+<button mat-button- routerLink="/page-not-found-component" routerLinkActive="active">page not found component</button>
+<button mat-button- routerLink="/modify-smartphone-component" routerLinkActive="active">Modify Smartphone </button>
+</mat-toolbar>
 <div class="app-container">
   <h2>{{title}}</h2>
 
   <router-outlet></router-outlet>
   </div>
-</div>
+
 </html>

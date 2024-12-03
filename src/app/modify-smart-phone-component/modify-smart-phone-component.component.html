@@ -1,48 +1,90 @@
-<p>Modify Smartphone Component Works!</p>
-<form [formGroup]="smartphoneForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="model">Model:</label>
-    <input type="text" id="model" formControlName="model" placeholder="Enter smartphone model" [appHighlightOnFocus]="'pink'" />
-     <div *ngIf="smartphoneForm.get('model')?.invalid && smartphoneForm.get('model')?.touched">
 
-     </div>
-  </div>
+<form [formGroup]="smartphoneForm" (ngSubmit)="onSubmit()" class="mat-form">
 
-  <div class="form-group">
-    <label for="color">Color:</label>
-    <input type="text" id="color" formControlName="color" placeholder="Enter color name" [appHighlightOnFocus]="'pink'" />
+  <mat-form-field appearance="outline" class="form-field" disabled>
+    <mat-label>model</mat-label>
+    <input matInput
+           type="text"
+           id="model"
+           formControlName="model"
+           placeholder="Enter smartphone model"
+           [appHighlightOnFocus]="'pink'"
+           matTooltip="Enter a unique model name"
+           matTooltipPosition="above"
+           />
+    <div *ngIf="smartphoneForm.get('model')?.invalid && smartphoneForm.get('model')?.touched">
+
+    </div>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>Color</mat-label>
+    <input matInput
+           type="text"
+           id="Color"
+           formControlName="color"
+           placeholder="Enter smartphone color"
+           [appHighlightOnFocus]="'pink'"
+           matTooltip="Enter the color of the smartphone"
+           matTooltipPosition="above"
+    />
     <div *ngIf="smartphoneForm.get('color')?.invalid && smartphoneForm.get('color')?.touched">
 
     </div>
-  </div>
+  </mat-form-field>
 
-  <div class="form-group">
-    <label for="size">Size (in inches):</label>
-    <input type="number" id="size" formControlName="size" min="0" placeholder=" Enter the phone size" [appHighlightOnFocus]="'pink'" />
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>Size</mat-label>
+    <input matInput
+           type="number"
+           id="size"
+           formControlName="size"
+           placeholder="Enter smartphone size"
+           [appHighlightOnFocus]="'pink'"
+           matTooltip="Enter the size of the smartphone "
+           matTooltipPosition="above"
+    />
     <div *ngIf="smartphoneForm.get('size')?.invalid && smartphoneForm.get('size')?.touched">
 
     </div>
-  </div>
+  </mat-form-field>
 
-  <div class="form-group">
-    <label for="price">Price:</label>
-    <input type="number" id="price" formControlName="price" class="form-control" required min="0" placeholder=" Enter the phone price" [appHighlightOnFocus]="'pink'" />
+
+
+
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>Prize</mat-label>
+    <input matInput
+           type="number"
+           id="prize"
+           formControlName="prize"
+           placeholder="Enter smartphone prize"
+           [appHighlightOnFocus]="'pink'"
+           matTooltip="Enter the prize of the smartphone"
+           matTooltipPosition="above"
+    />
     <div *ngIf="smartphoneForm.get('price')?.invalid && smartphoneForm.get('price')?.touched">
 
     </div>
+  </mat-form-field>
 
-  </div>
 
-  <div class="form-group form-check">
-    <input type="checkbox" id="isWaterproof" formControlName="isWaterproof" class="form-check-input"
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>Is Waterproof</mat-label>
+    <input matInput
+           type="checkbox"
+           id="isWaterproof"
+           formControlName="isWaterproof"
+           class="form-check-input"
+           [appHighlightOnFocus]="'pink'"
+           matTooltip="Select phone is waterproof or not "
+           matTooltipPosition="above"
     />
-    <label for="isWaterproof" class="form-check-label">Is Waterproof?</label>
-  </div>
 
-  <button type="submit" class="btn btn-primary" [disabled]="smartphoneForm.invalid">
-    {{ isEditMode ? 'Update' : 'Add' }} Smartphone
-  </button>
+  </mat-form-field>
+ <button mat-raised-button color="primary" type="submit">Submit</button>
+  <button mat-raised-button color="warn" type="button" (click)="onDelete()">Delete</button>
+  <button mat-raised-button type="button" (click)="navigateToSmartphoneList()">Back to List</button>
 
-
+<div *ngIf="error" class="error mat error">{{ error }}</div>
 </form>
-<div *ngIf="error" class="error">{{ error }}</div>

@@ -1,31 +1,49 @@
-<!doctype HTML>
-<div class="container">
-  <h2>Smartphone List</h2>
+<!-- Template: smartphone-list.component.html -->
 
+<div class="mat-container">
+  <!-- Table -->
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <td mat-cell *matCellDef="let smartphone">
+        {{ smartphone.price | currency: 'CAD':'symbol-narrow' }}
+      </td>
+    </ng-container>
 
-<table>
-  <thead>
-  <tr>
-    <th>Smartphone</th>
-    <th>Size</th>
-    <th>Price</th>
-    <th>Waterproof</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let smartphone of smartPhoneList" [routerLink]="['/smartphone', smartphone.model]" [appHoverHighlight]="'pink'" >
-    <td>{{ smartphone | smartphoneDisplay | uppercase}}</td>
-    <td>{{ smartphone.size }}</td>
-    <td>{{ smartphone.price  | currency: 'CAD': "symbol-narrow"}}</td>
-    <td>{{ smartphone.isWaterproof }}</td>
-    <td>{{'2024-11-17T12:00:00' | date: 'fullDate'}}</td>
-    <td>
-      <button class="btn btn-primary">Edit</button>
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let smartphone">
+        {{ smartphone.date | date: 'fullDate' }}
+      </td>
+    </ng-container>
 
-    </td>
-  </tr>
-  </tbody>
-</table>
+    <!-- Actions Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let smartphone">
+        <button mat-raised-button color="primary" (click)="editsmartPhone(smartphone.model)">
+          Edit
+        </button>
+        <button mat-raised-button color="warn" (click)="deletesmartPhone(smartphone.model)">
+          Delete
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Header and Row Declarations -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- Pagination -->
+  <mat-paginator
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    showFirstLastButtons>
+  </mat-paginator>
+
+  <!-- Error Message -->
+  <div *ngIf="error" class="mat-error">{{ error }}</div>
 </div>
-<div *ngIf="error" class="error">{{ error }}</div>

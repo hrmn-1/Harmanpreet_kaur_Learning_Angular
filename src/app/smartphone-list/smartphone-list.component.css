@@ -1,0 +1,23 @@
+.mat-container{
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.mat-elevation-z8{
+  margin-top: 1rem;
+  border-radius: 8px;
+}
+
+.mat-header-cell{
+  font-weight: bold;
+}
+
+.mat-row {
+  cursor: pointer;
+}
+
+.mat-error {
+  color: red;
+  font-weight: bold;
+}

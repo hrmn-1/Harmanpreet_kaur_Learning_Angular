@@ -5,13 +5,24 @@ import { SmartphoneService } from '../services/smartphone.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
 import {HighlightOnFocusDirective} from "../directives/highlight-on-focus.directive";
+import {NgIf} from "@angular/common";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
+import {MatButton} from "@angular/material/button";
+import {MatTooltip} from "@angular/material/tooltip"
 
 @Component({
-  selector: 'app-modify-smart-phone-component',
+  selector: 'app-modify-smart-phone',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    HighlightOnFocusDirective
+    HighlightOnFocusDirective,
+    NgIf,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatButton,
+    MatTooltip
   ],
   templateUrl: './modify-smart-phone-component.component.html',
   styleUrls: ['./modify-smart-phone-component.component.css']
@@ -45,16 +56,17 @@ export class ModifySmartPhoneComponentComponent implements OnInit {
         catchError(err => {
           this.error = 'Error fetching smartphone';
           console.error('Error fetching smartphone:', err);
-          return of(null);
+          return of(null); // Return `null` if error occurs
         })
-      ).subscribe(smartphone => {
+      ).subscribe((smartphone: smartPhone | null) => { // Explicitly define the type here
         if (smartphone) {
           this.smartphoneForm.patchValue(smartphone);
+        } else {
+          this.error = 'Smartphone not found';
         }
       });
     }
   }
-
   onSubmit(): void {
     if (this.smartphoneForm.valid) {
       const smartphoneData: smartPhone = this.smartphoneForm.value;

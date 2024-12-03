@@ -6,11 +6,15 @@ import { smartPhone } from '../shared/models/smartphone'; // Correct import path
 import { SmartphoneListComponent } from './smartphone-list/smartphone-list.component';
 import { SmartphoneListItemComponent } from './smartphone-list-item/smartphone-list-item.component';
 import { SmartphoneService } from './services/smartphone.service';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, SmartphoneListComponent, SmartphoneListItemComponent, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, CommonModule, SmartphoneListComponent, SmartphoneListItemComponent, RouterLink, RouterLinkActive,MatToolbarModule,
+    MatButtonModule  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

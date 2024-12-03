@@ -1,0 +1,27 @@
+.mat-form{
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.form-field{
+  width: 100%;
+}
+.checkbox{
+  margin: 1rem 0;
+}
+.button-group {
+  display: flex;
+  gap: 1rem;
+}
+.mat-error{
+  color: red;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+.mat-tooltip{
+  background-color: #333;
+  color: #fff;
+  font-size: 14px;
+}

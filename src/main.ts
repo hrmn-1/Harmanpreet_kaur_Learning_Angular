@@ -7,6 +7,7 @@ import {SmartphoneListItemComponent } from './app/smartphone-list-item/smartphon
 import{ModifySmartPhoneComponentComponent} from "./app/modify-smart-phone-component/modify-smart-phone-component.component";
 import {PageNotFoundComponentComponent} from "./app/page-not-found-component/page-not-found-component.component";
 import {ApplicationRef} from "@angular/core";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 const routes: Routes = [
@@ -17,5 +18,5 @@ const routes: Routes = [
   {path: '**', loadComponent: () => import('./app/page-not-found-component/page-not-found-component.component').then(m => m.PageNotFoundComponentComponent)}
 ];
 bootstrapApplication(AppComponent, {
-  providers: [provideRouter(routes)]
+  providers: [provideRouter(routes), provideAnimationsAsync()]
 }).then(r => console.log('Bootstrap successful'));
